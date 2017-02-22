@@ -10,6 +10,8 @@ namespace PocketMusic.Storage.DataStorage.Models
     {
         public Guid Id { get; set; }
 
+        public DataType Type { get; set; }
+
         public String JsonData { get; set; }
 
     }

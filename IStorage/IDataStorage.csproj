@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataType.cs" />
     <Compile Include="IStorage.cs" />
     <Compile Include="Models\FileItem.cs" />
     <Compile Include="Models\User.cs" />
