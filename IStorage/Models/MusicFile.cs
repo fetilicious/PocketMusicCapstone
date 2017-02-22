@@ -13,5 +13,9 @@ namespace PocketMusic.Storage.DataStorage.Models
         public String Name { get; set; }
 
         public Dictionary<String,String> BlobUrls { get; set; }
+
+        public String Artist { get; set; }
+
+        public DateTime CreationDate { get; set; }
     }
 }

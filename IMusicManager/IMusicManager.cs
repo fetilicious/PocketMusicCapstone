@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IStorage
+namespace PocketMusic.Playlist.MusicManager
 {
     public interface IMusicManager
     {
