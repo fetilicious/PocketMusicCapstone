@@ -12,6 +12,10 @@ namespace PocketMusic.Storage.DataStorage.Models
 
         public PMDataType Type { get; set; }
 
-        public String JsonData { get; set; }
+        public Dictionary<String,String> Data { get; set; }
+
+        public Dictionary<String, String> MetaData { get; set; }
+
+        public Dictionary<String, String> BlobLinks { get; set; }
     }
 }

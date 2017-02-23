@@ -14,13 +14,12 @@ namespace PocketMusic.Storage.DocumentDBStorage
     {
         /// Hard coded connection string
         private const string _connectionString = "https://pocketmusic.documents.azure.com:443/";
-
         // Hard coded primary key
         private const string _primaryKey = "YDlE8zGjyDBLh0EuFqXnKaoRSHdzkxuM8HfIE4RRj4R1054XPgsKwsPOVOPC8TqN4eA29XaKwwwqXn47MRFOEw==";
-
         // Hard coded database name
         private const string _dataBaseName = "PocketMusicMain";
-
+        // Collectionname
+        private string _collectionName;
         // DocumentDB client
         private DocumentClient _client;
 
@@ -30,22 +29,81 @@ namespace PocketMusic.Storage.DocumentDBStorage
 
             CreateDatabaseIfNotExists(_dataBaseName);
 
-            CreateDocumentCollectionIfNotExists(_dataBaseName, type.ToString());
+            _collectionName = type.ToString();
+
+            CreateDocumentCollectionIfNotExists(_dataBaseName, _collectionName);
         }
 
-        public Task<bool> DeleteFileItem(Guid id)
+        public async Task<bool> DeleteFileItem(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(_dataBaseName, _collectionName, id.ToString()));
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public Task<bool> GetFileItem(Guid id)
+        public async Task<FileItem> GetFileItem(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var response = await _client.ReadDocumentAsync(UriFactory.CreateDocumentUri(_dataBaseName, _collectionName, id.ToString()));
+
+                FileItem fileItem = (FileItem)(dynamic)response.Resource;
+
+                return fileItem;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public Task<bool> UpsertFileItem(FileItem fileItem)
+        public async Task<IEnumerable<FileItem>> QueryFileItems(string query)
         {
-            throw new NotImplementedException();
+            List<FileItem> result = new List<FileItem>();
+
+            try
+            {
+                // Leave Max item count to infinity for now
+                FeedOptions queryOptions = new FeedOptions { MaxItemCount = -1 };
+
+                // Execute Query
+                IQueryable<FileItem> fileQuery = _client.CreateDocumentQuery<FileItem>(
+                        UriFactory.CreateDocumentCollectionUri(_dataBaseName, _collectionName),
+                        query,
+                        queryOptions);
+
+                foreach (var item in fileQuery)
+                {
+                    result.Add(item);
+                }
+
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> UpsertFileItem(FileItem fileItem)
+        {
+            try
+            {
+                await _client.UpsertDocumentAsync(UriFactory.CreateDocumentUri(_dataBaseName, _collectionName, fileItem.Id.ToString()), fileItem);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void CreateDatabaseIfNotExists(string databaseName)

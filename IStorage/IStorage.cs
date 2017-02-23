@@ -13,6 +13,8 @@ namespace PocketMusic.Storage.DataStorage
 
         Task<bool> DeleteFileItem(Guid id);
 
-        Task<bool> GetFileItem(Guid id);
+        Task<FileItem> GetFileItem(Guid id);
+
+        Task<IEnumerable<FileItem>> QueryFileItems(string query);
     }
 }
