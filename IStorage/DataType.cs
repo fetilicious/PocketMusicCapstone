@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PocketMusic.Storage.DataStorage
 {
-    public enum DataType
+    public enum PMDataType
     {
         Music = 1,
         Playlist = 2,

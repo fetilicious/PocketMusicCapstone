@@ -9,10 +9,10 @@ namespace PocketMusic.Storage.DataStorage
 {
     public interface IStorage
     {
-        bool UpsertFileItem(FileItem fileItem);
+        Task<bool> UpsertFileItem(FileItem fileItem);
 
-        bool DeleteFileItem(Guid id);
+        Task<bool> DeleteFileItem(Guid id);
 
-        bool GetFileItem(Guid id);
+        Task<bool> GetFileItem(Guid id);
     }
 }
