@@ -27,11 +27,23 @@ namespace PocketMusic.Storage.DocumentDBStorage
         {
             _client = new DocumentClient(new Uri(_connectionString), _primaryKey);
 
-            CreateDatabaseIfNotExists(_dataBaseName);
-
             _collectionName = type.ToString();
+        }
 
-            CreateDocumentCollectionIfNotExists(_dataBaseName, _collectionName);
+        public async Task<bool> CreateDatabaseAndDocument()
+        {
+            try
+            {
+                await CreateDatabaseIfNotExists(_dataBaseName);
+
+                await CreateDocumentCollectionIfNotExists(_dataBaseName, _collectionName);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public async Task<bool> DeleteFileItem(Guid id)
@@ -96,34 +108,35 @@ namespace PocketMusic.Storage.DocumentDBStorage
         {
             try
             {
-                await _client.UpsertDocumentAsync(UriFactory.CreateDocumentUri(_dataBaseName, _collectionName, fileItem.Id.ToString()), fileItem);
+                await _client.UpsertDocumentAsync(UriFactory.CreateDocumentCollectionUri(_dataBaseName, _collectionName), fileItem);
             }
-            catch
+            catch (Exception ex)
             {
+
                 return false;
             }
 
             return true;
         }
 
-        private void CreateDatabaseIfNotExists(string databaseName)
+        private async Task CreateDatabaseIfNotExists(string databaseName)
         {
             // Check to verify a database with the id=FamilyDB does not exist
             try
             {
-                _client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(databaseName));
+                await _client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(databaseName));
             }
             catch
             {
-                _client.CreateDatabaseAsync(new Database { Id = databaseName });
+                await _client.CreateDatabaseAsync(new Database { Id = databaseName });
             }
         }
 
-        private void CreateDocumentCollectionIfNotExists(string databaseName, string collectionName)
+        private async Task CreateDocumentCollectionIfNotExists(string databaseName, string collectionName)
         {
             try
             {
-                _client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName));
+                await _client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName));
             }
             catch (DocumentClientException de)
             {
@@ -133,11 +146,11 @@ namespace PocketMusic.Storage.DocumentDBStorage
                 // Configure collections for maximum query flexibility including string range queries.
                 collectionInfo.IndexingPolicy = new IndexingPolicy(new RangeIndex(DataType.String) { Precision = -1 });
 
-                // Here we create a collection with 200 RU/s.
-                _client.CreateDocumentCollectionAsync(
+                // Here we create a collection with 400 RU/s.
+                await _client.CreateDocumentCollectionAsync(
                     UriFactory.CreateDatabaseUri(databaseName),
                     collectionInfo,
-                    new RequestOptions { OfferThroughput = 200 });
+                    new RequestOptions { OfferThroughput = 400 });
             }
         }
     }

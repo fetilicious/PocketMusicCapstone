@@ -11,5 +11,6 @@ namespace PocketMusic.Storage.DataStorage
         Music = 1,
         Playlist = 2,
         User = 3,
+        Test = 100,
     }
 }

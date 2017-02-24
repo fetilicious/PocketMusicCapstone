@@ -8,14 +8,23 @@ namespace PocketMusic.Storage.DataStorage.Models
 {
     public class FileItem
     {
-        public Guid Id { get; set; }
+        public FileItem(Guid ident, PMDataType type)
+        {
+            id = ident;
+            Type = type;
+            Data = new Dictionary<string, string>();
+            MetaData = new Dictionary<string, string>();
+            BlobLinks = new Dictionary<string, string>();
+        }
 
-        public PMDataType Type { get; set; }
+        public Guid id { get; }
 
-        public Dictionary<String,String> Data { get; set; }
+        public PMDataType Type { get; }
 
-        public Dictionary<String, String> MetaData { get; set; }
+        public Dictionary<String,String> Data { get; }
 
-        public Dictionary<String, String> BlobLinks { get; set; }
+        public Dictionary<String,String> MetaData { get; }
+
+        public Dictionary<String,String> BlobLinks { get; }
     }
 }
