@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AzureBlobStorage;
+using Newtonsoft.Json;
 using PocketMusic.Storage.DataStorage;
 using PocketMusic.Storage.DataStorage.Models;
 using PocketMusic.Storage.DocumentDBStorage;
@@ -17,6 +18,8 @@ namespace StorageTestApplication
     public partial class DocumentDBTestForm : Form
     {
         DocumentDBStorage _storage;
+
+        BlobStorage _blobStorage;
 
         public DocumentDBTestForm()
         {
@@ -94,6 +97,53 @@ namespace StorageTestApplication
                 var result = await _storage.DeleteFileItem(id);
 
                 resultTextBox.Text = result.ToString();
+            }
+            catch (Exception ex)
+            {
+                resultTextBox.Text = ex.Message;
+            }
+        }
+
+        private void createBlobClientButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _blobStorage = new BlobStorage("test");
+
+                resultTextBox.Text = "Client created and test container created.";
+            }
+            catch (Exception ex)
+            {
+                resultTextBox.Text = ex.Message;
+            }
+        }
+
+        private async void uploadTestFileButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var Uri = await _blobStorage.UploadBlob(Guid.Parse(fileIdTextBox.Text), blobNameTextBox.Text, localPathTextBox.Text);
+
+                resultTextBox.Text = "Blob uploaded to " + Uri.ToString();
+            }
+            catch (Exception ex)
+            {
+                resultTextBox.Text = ex.Message;
+            }
+        }
+
+        private void RandomGuidButton_Click(object sender, EventArgs e)
+        {
+            fileIdTextBox.Text = Guid.NewGuid().ToString();
+        }
+
+        private async void deleteTestFileButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await _blobStorage.DeleteBlob(Guid.Parse(fileIdTextBox.Text), blobNameTextBox.Text);
+
+                resultTextBox.Text = "Blob " + fileIdTextBox.Text + " Deleted";
             }
             catch (Exception ex)
             {

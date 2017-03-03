@@ -6,8 +6,23 @@ using System.Threading.Tasks;
 
 namespace PocketMusic.Storage.BlobStorage
 {
-    public class IBlobStorage
+    public interface IBlobStorage
     {
+        /// <summary>
+        /// Uploads a Blob 
+        /// </summary>
+        /// <param name="fileId">fileID assosciated with the blob</param>
+        /// <param name="blobName">name of the blob</param>
+        /// <param name="localPath">local path blob is stored</param>
+        /// <returns></returns>
+        Task<Uri> UploadBlob(Guid fileId, string blobName, string localPath);
 
+        /// <summary>
+        /// Deletes a blob
+        /// </summary>
+        /// <param name="fileId">fileID assosciated with the blob</param>
+        /// <param name="blobName">name of the blob</param>
+        /// <returns></returns>
+        Task<bool> DeleteBlob(Guid fileId, string blobName);
     }
 }

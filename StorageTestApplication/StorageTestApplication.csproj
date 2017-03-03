@@ -85,6 +85,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AzureBlobStorage\AzureBlobStorage.csproj">
+      <Project>{4F1E8FAA-25D1-4E51-980B-BFC7754E366C}</Project>
+      <Name>AzureBlobStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DocumentDBDataStore\DocumentDBStorage.csproj">
       <Project>{6590A698-8543-493D-AC8C-97DFC2654FFA}</Project>
       <Name>DocumentDBStorage</Name>
