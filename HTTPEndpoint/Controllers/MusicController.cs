@@ -1,4 +1,5 @@
-﻿using PocketMusic.Storage.DataStorage.Models;
+﻿using PocketMusic.Music.MusicManager;
+using PocketMusic.Storage.DataStorage.Models;
 using PocketMusic.Storage.StaticStorage;
 using System;
 using System.Collections.Generic;

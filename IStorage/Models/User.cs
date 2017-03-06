@@ -9,8 +9,6 @@ namespace PocketMusic.Storage.DataStorage.Models
 {
     public class User
     {
-        public Guid Id;
-
         public String UserName;
 
         public IPAddress StreamingAddress; 

@@ -1,4 +1,6 @@
-﻿using PocketMusic.Storage.DataStorage.Models;
+﻿using PocketMusic.Music.MusicManager;
+using PocketMusic.Storage.DataStorage.Models;
+using PocketMusic.Storage.DocumentDBStorage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +11,129 @@ namespace PocketMusic.Playlist.PlaylistManager
 {
     public class PlaylistManager : IPlaylistManager
     {
-        public bool ConnectToPlaylist(Guid playlistId, User user)
+
+        DocumentDBStorage<Playlist> _storage;
+
+        public PlaylistManager()
         {
-            throw new NotImplementedException();
+            _storage = new DocumentDBStorage<Playlist>(Storage.DataStorage.PMDataType.Playlist);
         }
 
-        public bool CreatePlaylist(Guid playlistId, MusicFile music, User user)
+        public async Task<Playlist> CreatePlaylist(String name, MusicFile music, User user)
         {
-            throw new NotImplementedException();
+            #region Validation
+
+            if (music == null)
+            {
+                throw new ArgumentNullException(nameof(music));
+            }
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (!music.Layers.Any())
+            {
+                throw new ArgumentException(nameof(music.Layers));
+            }
+
+            #endregion 
+
+            Playlist playlist = new Playlist(Guid.NewGuid(), name);
+
+            playlist.ConnectedUsers.Add(user.UserName, user);
+            
+            foreach (var layer in music.Layers)
+            {
+                Tuple<User,LayerInfo> availableLayer = new Tuple<User, LayerInfo>(null, layer.Value);
+                playlist.AvailableLayers.Add(availableLayer);
+            }
+
+            if (!await _storage.UpsertFileItem(playlist))
+            {
+                return null;
+            }
+
+            return playlist;
         }
 
-        public bool DeletePlaylist(Guid playlistId)
+        public async Task<bool> DeletePlaylist(Guid playlistId)
         {
-            throw new NotImplementedException();
+            return await _storage.DeleteFileItem(playlistId);
         }
 
-        public bool DisconnectFromPlaylist(Guid playlistId, User user)
+        public async Task<bool> DisconnectFromPlaylist(Guid playlistId, User user)
         {
-            throw new NotImplementedException();
+            #region Validation
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            #endregion
+
+            var playlist = await _storage.GetFileItem(playlistId);
+
+            playlist.ConnectedUsers.Remove(user.UserName);
+            foreach (var layer in playlist.AvailableLayers)
+            {
+                if (layer.Item1 != null && String.Compare(layer.Item1.UserName,user.UserName) == 0)
+                {
+                    playlist.AvailableLayers.Remove(layer);
+                }
+            }
+
+            if (!await _storage.UpsertFileItem(playlist))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<Playlist> ConnectToPlaylistLayer(Guid playlistId, string layerName, User user)
+        {
+            #region Validation
+
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (String.IsNullOrWhiteSpace(layerName))
+            {
+                throw new ArgumentNullException(nameof(layerName));
+            }
+
+            #endregion
+
+            var playlist = await _storage.GetFileItem(playlistId);
+
+            playlist.ConnectedUsers.Remove(user.UserName);
+            foreach (var layer in playlist.AvailableLayers)
+            {
+                if (layer.Item1 == null && String.Compare(layer.Item2.Name, layerName) == 0)
+                {
+                    playlist.AvailableLayers.Remove(layer);
+                    playlist.AvailableLayers.Add(new Tuple<User, LayerInfo>(user, layer.Item2));
+                }
+            }
+
+            if (!await _storage.UpsertFileItem(playlist))
+            {
+                return null;
+            }
+
+            return playlist;
+        }
+
+        public async Task<IEnumerable<Playlist>> GetAllPlaylists()
+        {
+            return await _storage.QueryFileItems("SELECT * FROM p");
+        }
+
+        public async Task<Playlist> GetPlaylist(Guid playlistId)
+        {
+            return await _storage.GetFileItem(playlistId);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using PocketMusic.Storage.DataStorage.Models;
+﻿using PocketMusic.Music.MusicManager;
+using PocketMusic.Storage.DataStorage.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,16 @@ namespace PocketMusic.Playlist.PlaylistManager
 {
     public interface IPlaylistManager
     {
-        bool CreatePlaylist(Guid playlistId, MusicFile music, User user);
+        Task<Playlist> CreatePlaylist(String name, MusicFile music, User user);
 
-        bool DeletePlaylist(Guid playlistId);
+        Task<bool> DeletePlaylist(Guid playlistId);
 
-        bool ConnectToPlaylist(Guid playlistId, User user);
+        Task<IEnumerable<Playlist>> GetAllPlaylists();
 
-        bool DisconnectFromPlaylist(Guid playlistId, User user);
+        Task<Playlist> GetPlaylist(Guid playlistId);
+
+        Task<Playlist> ConnectToPlaylistLayer(Guid playlistId, string layerName, User user);
+
+        Task<bool> DisconnectFromPlaylist(Guid playlistId, User user);
     }
 }

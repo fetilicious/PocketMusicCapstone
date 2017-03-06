@@ -1,5 +1,6 @@
 ﻿using AzureBlobStorage;
 using Newtonsoft.Json;
+using PocketMusic.Music.MusicManager;
 using PocketMusic.Storage.DataStorage;
 using PocketMusic.Storage.DataStorage.Models;
 using PocketMusic.Storage.DocumentDBStorage;
@@ -17,9 +18,11 @@ namespace StorageTestApplication
 {
     public partial class DocumentDBTestForm : Form
     {
-        DocumentDBStorage _storage;
+        DocumentDBStorage<FileItem> _storage;
 
         BlobStorage _blobStorage;
+
+        MusicManager _musicManager;
 
         public DocumentDBTestForm()
         {
@@ -30,7 +33,7 @@ namespace StorageTestApplication
         {
             try
             {
-                _storage = new DocumentDBStorage(PMDataType.Test);
+                _storage = new DocumentDBStorage<FileItem>(PMDataType.Test);
                 await _storage.CreateDatabaseAndDocument();
                 resultTextBox.Text = "Created Database";
             }
@@ -45,9 +48,18 @@ namespace StorageTestApplication
         {
             try
             {
-                FileItem fileItem = new FileItem(Guid.NewGuid(),PMDataType.Test);
+                FileItem fileItem;
 
-                fileItem.Data.Add("test", "value");
+                if (!String.IsNullOrEmpty(idTextBox.Text))
+                {
+                    fileItem = new FileItem(Guid.Parse(idTextBox.Text), PMDataType.Test);
+                }
+                else
+                {
+                    fileItem = new FileItem(Guid.NewGuid(), PMDataType.Test);
+                }
+
+                fileItem.Data.Add("test", "abc");
                 fileItem.Data.Add("test1", "value1");
                 fileItem.Data.Add("test2", "value2");
                 fileItem.Data.Add("test3", "value3");
@@ -122,7 +134,7 @@ namespace StorageTestApplication
         {
             try
             {
-                var Uri = await _blobStorage.UploadBlob(Guid.Parse(fileIdTextBox.Text), blobNameTextBox.Text, localPathTextBox.Text);
+                var Uri = await _blobStorage.UploadBlob(Guid.Parse(fileIdTextBox.Text), blobNameTextBox.Text, localPathTextBox.Text, false);
 
                 resultTextBox.Text = "Blob uploaded to " + Uri.ToString();
             }
@@ -144,6 +156,67 @@ namespace StorageTestApplication
                 await _blobStorage.DeleteBlob(Guid.Parse(fileIdTextBox.Text), blobNameTextBox.Text);
 
                 resultTextBox.Text = "Blob " + fileIdTextBox.Text + " Deleted";
+            }
+            catch (Exception ex)
+            {
+                resultTextBox.Text = ex.Message;
+            }
+        }
+
+        private void createMusicManagerButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _musicManager = new MusicManager();
+
+                resultTextBox.Text = "Music Manager Created";
+            }
+            catch (Exception ex)
+            {
+                resultTextBox.Text = ex.Message;
+            }
+        }
+
+        private async void upsertRandomMusicButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MusicFile mf = new MusicFile();
+
+                mf.Name = Guid.NewGuid().ToString("N");
+                mf.UserName = "testUser";
+
+                var result = await _musicManager.UpsertMusicFile(mf);
+
+                resultTextBox.Text = "Upserted: " + JsonConvert.SerializeObject(result);
+            }
+            catch (Exception ex)
+            {
+                resultTextBox.Text = ex.Message;
+            }
+        }
+
+        private async void getAllMusicButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = await _musicManager.GetAllMusicFiles(userNameTextBox.Text);
+
+                resultTextBox.Text = JsonConvert.SerializeObject(result);
+            }
+            catch (Exception ex)
+            {
+                resultTextBox.Text = ex.Message;
+            }
+        }
+
+        private async void deleteMusicButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = await _musicManager.DeleteMusicFile(Guid.Parse(musicIdTextBox.Text));
+
+                resultTextBox.Text = "Deleted" + JsonConvert.SerializeObject(result);
             }
             catch (Exception ex)
             {

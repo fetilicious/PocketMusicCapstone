@@ -48,7 +48,6 @@
     <Compile Include="IStorage.cs" />
     <Compile Include="Models\FileItem.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\MusicFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

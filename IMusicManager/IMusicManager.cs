@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PocketMusic.Playlist.MusicManager
+namespace PocketMusic.Music.MusicManager
 {
     public interface IMusicManager
     {
-        bool UpsertMusicFile(MusicFile file);
+        Task<MusicFile> UpsertMusicFile(MusicFile file);
 
-        bool DeleteMusicFile(int id);
+        Task<MusicFile> GetMusicFile(Guid id);
 
-        IEnumerable<MusicFile> GetAllMusicFiles();
+        Task<bool> DeleteMusicFile(Guid id);
+
+        Task<IEnumerable<MusicFile>> GetAllMusicFiles(String user);
     }
 }

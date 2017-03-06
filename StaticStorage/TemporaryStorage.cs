@@ -1,4 +1,4 @@
-﻿using PocketMusic.Storage.DataStorage.Models;
+﻿using PocketMusic.Music.MusicManager;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -12,12 +12,12 @@ namespace PocketMusic.Storage.StaticStorage
     {
         static TemporaryStorage()
         {
-            _temporaryStorage.TryAdd(1, new MusicFile { Id = 1, Name = "Don't Stop Believing", });
-            _temporaryStorage.TryAdd(2, new MusicFile { Id = 2, Name = "Paralyzer", });
-            _temporaryStorage.TryAdd(3, new MusicFile { Id = 3, Name = "Viva La Vida", });
+            _temporaryStorage.TryAdd(1, new MusicFile { id = new Guid(), Name = "Don't Stop Believing", });
+            _temporaryStorage.TryAdd(2, new MusicFile { id = new Guid(), Name = "Paralyzer", });
+            _temporaryStorage.TryAdd(3, new MusicFile { id = new Guid(), Name = "Viva La Vida", });
         }
 
-        private static ConcurrentDictionary<int, MusicFile> _temporaryStorage = new ConcurrentDictionary<int, MusicFile>();
+        private static ConcurrentDictionary<Guid, MusicFile> _temporaryStorage = new ConcurrentDictionary<Guid, MusicFile>();
 
         public async static Task<bool> UpsertMusicFile(MusicFile file)
         {
@@ -27,16 +27,16 @@ namespace PocketMusic.Storage.StaticStorage
             {
                 return false;
             }
-            if (_temporaryStorage.ContainsKey(file.Id))
+            if (_temporaryStorage.ContainsKey(file.id))
             {
                 MusicFile outFile;
                 // Temporary for UPSERT
-                _temporaryStorage.TryRemove(file.Id, out outFile);
+                _temporaryStorage.TryRemove(file.id, out outFile);
             }
 
             #endregion
 
-            _temporaryStorage.TryAdd(file.Id, file);
+            _temporaryStorage.TryAdd(file.id, file);
 
             return true;
         }

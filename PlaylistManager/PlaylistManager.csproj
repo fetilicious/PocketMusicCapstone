@@ -44,6 +44,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DocumentDBDataStore\DocumentDBStorage.csproj">
+      <Project>{6590A698-8543-493D-AC8C-97DFC2654FFA}</Project>
+      <Name>DocumentDBStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IMusicManager\IMusicManager.csproj">
+      <Project>{8420E2BA-B100-42BC-A6A6-D0A9BDEA3701}</Project>
+      <Name>IMusicManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IPlaylistManager\IPlaylistManager.csproj">
       <Project>{11D28BA1-32FA-4F51-8CB9-1EF55B91FE9C}</Project>
       <Name>IPlaylistManager</Name>

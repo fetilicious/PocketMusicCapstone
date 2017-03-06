@@ -28,237 +28,389 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.createDatabaseButton = new System.Windows.Forms.Button();
-            this.upsertButton = new System.Windows.Forms.Button();
             this.resultTextBox = new System.Windows.Forms.RichTextBox();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.idTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.getButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.createBlobClientButton = new System.Windows.Forms.Button();
-            this.uploadTestFileButton = new System.Windows.Forms.Button();
-            this.fileIdTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.blobNameTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.localPathTextBox = new System.Windows.Forms.TextBox();
-            this.localPathLabel = new System.Windows.Forms.Label();
-            this.deleteTestFileButton = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.RandomGuidButton = new System.Windows.Forms.Button();
+            this.deleteTestFileButton = new System.Windows.Forms.Button();
+            this.localPathLabel = new System.Windows.Forms.Label();
+            this.localPathTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.blobNameTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.fileIdTextBox = new System.Windows.Forms.TextBox();
+            this.uploadTestFileButton = new System.Windows.Forms.Button();
+            this.createBlobClientButton = new System.Windows.Forms.Button();
+            this.getButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.idTextBox = new System.Windows.Forms.TextBox();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.upsertButton = new System.Windows.Forms.Button();
+            this.createDatabaseButton = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.userNameTextBox = new System.Windows.Forms.TextBox();
+            this.getAllMusicButton = new System.Windows.Forms.Button();
+            this.getMusicButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.musicIdTextBox = new System.Windows.Forms.TextBox();
+            this.deleteMusicButton = new System.Windows.Forms.Button();
+            this.upsertRandomMusicButton = new System.Windows.Forms.Button();
+            this.createMusicManagerButton = new System.Windows.Forms.Button();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // createDatabaseButton
-            // 
-            this.createDatabaseButton.Location = new System.Drawing.Point(12, 12);
-            this.createDatabaseButton.Name = "createDatabaseButton";
-            this.createDatabaseButton.Size = new System.Drawing.Size(169, 23);
-            this.createDatabaseButton.TabIndex = 0;
-            this.createDatabaseButton.Text = "Create Test Database";
-            this.createDatabaseButton.UseVisualStyleBackColor = true;
-            this.createDatabaseButton.Click += new System.EventHandler(this.createDatabaseButton_Click);
-            // 
-            // upsertButton
-            // 
-            this.upsertButton.Location = new System.Drawing.Point(12, 41);
-            this.upsertButton.Name = "upsertButton";
-            this.upsertButton.Size = new System.Drawing.Size(169, 23);
-            this.upsertButton.TabIndex = 1;
-            this.upsertButton.Text = "Upsert Random Record";
-            this.upsertButton.UseVisualStyleBackColor = true;
-            this.upsertButton.Click += new System.EventHandler(this.upsertButton_Click);
             // 
             // resultTextBox
             // 
-            this.resultTextBox.Location = new System.Drawing.Point(12, 282);
+            this.resultTextBox.Location = new System.Drawing.Point(12, 344);
             this.resultTextBox.Name = "resultTextBox";
-            this.resultTextBox.Size = new System.Drawing.Size(599, 96);
+            this.resultTextBox.Size = new System.Drawing.Size(642, 96);
             this.resultTextBox.TabIndex = 2;
             this.resultTextBox.Text = "";
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Location = new System.Drawing.Point(455, 41);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(156, 23);
-            this.deleteButton.TabIndex = 3;
-            this.deleteButton.Text = "Delete Record";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
-            // idTextBox
-            // 
-            this.idTextBox.Location = new System.Drawing.Point(278, 12);
-            this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(333, 20);
-            this.idTextBox.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(256, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(16, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Id";
-            // 
-            // getButton
-            // 
-            this.getButton.Location = new System.Drawing.Point(278, 41);
-            this.getButton.Name = "getButton";
-            this.getButton.Size = new System.Drawing.Size(158, 23);
-            this.getButton.TabIndex = 6;
-            this.getButton.Text = "Get Record";
-            this.getButton.UseVisualStyleBackColor = true;
-            this.getButton.Click += new System.EventHandler(this.getButton_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 266);
+            this.label2.Location = new System.Drawing.Point(12, 328);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Result";
             // 
-            // createBlobClientButton
+            // tabControl1
             // 
-            this.createBlobClientButton.Location = new System.Drawing.Point(15, 119);
-            this.createBlobClientButton.Name = "createBlobClientButton";
-            this.createBlobClientButton.Size = new System.Drawing.Size(169, 23);
-            this.createBlobClientButton.TabIndex = 8;
-            this.createBlobClientButton.Text = "Create Blob Client";
-            this.createBlobClientButton.UseVisualStyleBackColor = true;
-            this.createBlobClientButton.Click += new System.EventHandler(this.createBlobClientButton_Click);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(642, 313);
+            this.tabControl1.TabIndex = 18;
             // 
-            // uploadTestFileButton
+            // tabPage1
             // 
-            this.uploadTestFileButton.Location = new System.Drawing.Point(278, 200);
-            this.uploadTestFileButton.Name = "uploadTestFileButton";
-            this.uploadTestFileButton.Size = new System.Drawing.Size(169, 23);
-            this.uploadTestFileButton.TabIndex = 9;
-            this.uploadTestFileButton.Text = "Upload Blob";
-            this.uploadTestFileButton.UseVisualStyleBackColor = true;
-            this.uploadTestFileButton.Click += new System.EventHandler(this.uploadTestFileButton_Click);
+            this.tabPage1.Controls.Add(this.RandomGuidButton);
+            this.tabPage1.Controls.Add(this.deleteTestFileButton);
+            this.tabPage1.Controls.Add(this.localPathLabel);
+            this.tabPage1.Controls.Add(this.localPathTextBox);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.blobNameTextBox);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.fileIdTextBox);
+            this.tabPage1.Controls.Add(this.uploadTestFileButton);
+            this.tabPage1.Controls.Add(this.createBlobClientButton);
+            this.tabPage1.Controls.Add(this.getButton);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.idTextBox);
+            this.tabPage1.Controls.Add(this.deleteButton);
+            this.tabPage1.Controls.Add(this.upsertButton);
+            this.tabPage1.Controls.Add(this.createDatabaseButton);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(634, 287);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "DocumentDB";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // fileIdTextBox
+            // RandomGuidButton
             // 
-            this.fileIdTextBox.Location = new System.Drawing.Point(278, 122);
-            this.fileIdTextBox.Name = "fileIdTextBox";
-            this.fileIdTextBox.Size = new System.Drawing.Size(333, 20);
-            this.fileIdTextBox.TabIndex = 10;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(243, 125);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "fileId";
-            // 
-            // blobNameTextBox
-            // 
-            this.blobNameTextBox.Location = new System.Drawing.Point(278, 148);
-            this.blobNameTextBox.Name = "blobNameTextBox";
-            this.blobNameTextBox.Size = new System.Drawing.Size(333, 20);
-            this.blobNameTextBox.TabIndex = 12;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(217, 151);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "blobName";
-            // 
-            // localPathTextBox
-            // 
-            this.localPathTextBox.Location = new System.Drawing.Point(278, 174);
-            this.localPathTextBox.Name = "localPathTextBox";
-            this.localPathTextBox.Size = new System.Drawing.Size(333, 20);
-            this.localPathTextBox.TabIndex = 14;
-            // 
-            // localPathLabel
-            // 
-            this.localPathLabel.AutoSize = true;
-            this.localPathLabel.Location = new System.Drawing.Point(217, 177);
-            this.localPathLabel.Name = "localPathLabel";
-            this.localPathLabel.Size = new System.Drawing.Size(53, 13);
-            this.localPathLabel.TabIndex = 15;
-            this.localPathLabel.Text = "local path";
+            this.RandomGuidButton.Location = new System.Drawing.Point(526, 202);
+            this.RandomGuidButton.Name = "RandomGuidButton";
+            this.RandomGuidButton.Size = new System.Drawing.Size(92, 23);
+            this.RandomGuidButton.TabIndex = 33;
+            this.RandomGuidButton.Text = "Random Guid";
+            this.RandomGuidButton.UseVisualStyleBackColor = true;
+            this.RandomGuidButton.Click += new System.EventHandler(this.RandomGuidButton_Click);
             // 
             // deleteTestFileButton
             // 
-            this.deleteTestFileButton.Location = new System.Drawing.Point(278, 229);
+            this.deleteTestFileButton.Location = new System.Drawing.Point(285, 231);
             this.deleteTestFileButton.Name = "deleteTestFileButton";
             this.deleteTestFileButton.Size = new System.Drawing.Size(169, 23);
-            this.deleteTestFileButton.TabIndex = 16;
+            this.deleteTestFileButton.TabIndex = 32;
             this.deleteTestFileButton.Text = "Delete Blob";
             this.deleteTestFileButton.UseVisualStyleBackColor = true;
             this.deleteTestFileButton.Click += new System.EventHandler(this.deleteTestFileButton_Click);
             // 
-            // RandomGuidButton
+            // localPathLabel
             // 
-            this.RandomGuidButton.Location = new System.Drawing.Point(519, 200);
-            this.RandomGuidButton.Name = "RandomGuidButton";
-            this.RandomGuidButton.Size = new System.Drawing.Size(92, 23);
-            this.RandomGuidButton.TabIndex = 17;
-            this.RandomGuidButton.Text = "Random Guid";
-            this.RandomGuidButton.UseVisualStyleBackColor = true;
-            this.RandomGuidButton.Click += new System.EventHandler(this.RandomGuidButton_Click);
+            this.localPathLabel.AutoSize = true;
+            this.localPathLabel.Location = new System.Drawing.Point(224, 179);
+            this.localPathLabel.Name = "localPathLabel";
+            this.localPathLabel.Size = new System.Drawing.Size(53, 13);
+            this.localPathLabel.TabIndex = 31;
+            this.localPathLabel.Text = "local path";
+            // 
+            // localPathTextBox
+            // 
+            this.localPathTextBox.Location = new System.Drawing.Point(285, 176);
+            this.localPathTextBox.Name = "localPathTextBox";
+            this.localPathTextBox.Size = new System.Drawing.Size(333, 20);
+            this.localPathTextBox.TabIndex = 30;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(224, 153);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "blobName";
+            // 
+            // blobNameTextBox
+            // 
+            this.blobNameTextBox.Location = new System.Drawing.Point(285, 150);
+            this.blobNameTextBox.Name = "blobNameTextBox";
+            this.blobNameTextBox.Size = new System.Drawing.Size(333, 20);
+            this.blobNameTextBox.TabIndex = 28;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(250, 127);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 13);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "fileId";
+            // 
+            // fileIdTextBox
+            // 
+            this.fileIdTextBox.Location = new System.Drawing.Point(285, 124);
+            this.fileIdTextBox.Name = "fileIdTextBox";
+            this.fileIdTextBox.Size = new System.Drawing.Size(333, 20);
+            this.fileIdTextBox.TabIndex = 26;
+            // 
+            // uploadTestFileButton
+            // 
+            this.uploadTestFileButton.Location = new System.Drawing.Point(285, 202);
+            this.uploadTestFileButton.Name = "uploadTestFileButton";
+            this.uploadTestFileButton.Size = new System.Drawing.Size(169, 23);
+            this.uploadTestFileButton.TabIndex = 25;
+            this.uploadTestFileButton.Text = "Upload Blob";
+            this.uploadTestFileButton.UseVisualStyleBackColor = true;
+            this.uploadTestFileButton.Click += new System.EventHandler(this.uploadTestFileButton_Click);
+            // 
+            // createBlobClientButton
+            // 
+            this.createBlobClientButton.Location = new System.Drawing.Point(22, 121);
+            this.createBlobClientButton.Name = "createBlobClientButton";
+            this.createBlobClientButton.Size = new System.Drawing.Size(169, 23);
+            this.createBlobClientButton.TabIndex = 24;
+            this.createBlobClientButton.Text = "Create Blob Client";
+            this.createBlobClientButton.UseVisualStyleBackColor = true;
+            this.createBlobClientButton.Click += new System.EventHandler(this.createBlobClientButton_Click);
+            // 
+            // getButton
+            // 
+            this.getButton.Location = new System.Drawing.Point(285, 43);
+            this.getButton.Name = "getButton";
+            this.getButton.Size = new System.Drawing.Size(158, 23);
+            this.getButton.TabIndex = 23;
+            this.getButton.Text = "Get Record";
+            this.getButton.UseVisualStyleBackColor = true;
+            this.getButton.Click += new System.EventHandler(this.getButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(263, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(16, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Id";
+            // 
+            // idTextBox
+            // 
+            this.idTextBox.Location = new System.Drawing.Point(285, 14);
+            this.idTextBox.Name = "idTextBox";
+            this.idTextBox.Size = new System.Drawing.Size(333, 20);
+            this.idTextBox.TabIndex = 21;
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Location = new System.Drawing.Point(462, 43);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(156, 23);
+            this.deleteButton.TabIndex = 20;
+            this.deleteButton.Text = "Delete Record";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // upsertButton
+            // 
+            this.upsertButton.Location = new System.Drawing.Point(19, 43);
+            this.upsertButton.Name = "upsertButton";
+            this.upsertButton.Size = new System.Drawing.Size(169, 23);
+            this.upsertButton.TabIndex = 19;
+            this.upsertButton.Text = "Upsert Random Record";
+            this.upsertButton.UseVisualStyleBackColor = true;
+            this.upsertButton.Click += new System.EventHandler(this.upsertButton_Click);
+            // 
+            // createDatabaseButton
+            // 
+            this.createDatabaseButton.Location = new System.Drawing.Point(19, 14);
+            this.createDatabaseButton.Name = "createDatabaseButton";
+            this.createDatabaseButton.Size = new System.Drawing.Size(169, 23);
+            this.createDatabaseButton.TabIndex = 18;
+            this.createDatabaseButton.Text = "Create Test Database";
+            this.createDatabaseButton.UseVisualStyleBackColor = true;
+            this.createDatabaseButton.Click += new System.EventHandler(this.createDatabaseButton_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.userNameTextBox);
+            this.tabPage2.Controls.Add(this.getAllMusicButton);
+            this.tabPage2.Controls.Add(this.getMusicButton);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.musicIdTextBox);
+            this.tabPage2.Controls.Add(this.deleteMusicButton);
+            this.tabPage2.Controls.Add(this.upsertRandomMusicButton);
+            this.tabPage2.Controls.Add(this.createMusicManagerButton);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(634, 287);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "MusicManager";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(220, 111);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 13);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "UserName";
+            // 
+            // userNameTextBox
+            // 
+            this.userNameTextBox.Location = new System.Drawing.Point(283, 108);
+            this.userNameTextBox.Name = "userNameTextBox";
+            this.userNameTextBox.Size = new System.Drawing.Size(333, 20);
+            this.userNameTextBox.TabIndex = 29;
+            // 
+            // getAllMusicButton
+            // 
+            this.getAllMusicButton.Location = new System.Drawing.Point(283, 134);
+            this.getAllMusicButton.Name = "getAllMusicButton";
+            this.getAllMusicButton.Size = new System.Drawing.Size(169, 23);
+            this.getAllMusicButton.TabIndex = 28;
+            this.getAllMusicButton.Text = "Get All Music";
+            this.getAllMusicButton.UseVisualStyleBackColor = true;
+            this.getAllMusicButton.Click += new System.EventHandler(this.getAllMusicButton_Click);
+            // 
+            // getMusicButton
+            // 
+            this.getMusicButton.Location = new System.Drawing.Point(283, 38);
+            this.getMusicButton.Name = "getMusicButton";
+            this.getMusicButton.Size = new System.Drawing.Size(158, 23);
+            this.getMusicButton.TabIndex = 27;
+            this.getMusicButton.Text = "Get Music";
+            this.getMusicButton.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(261, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 13);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Id";
+            // 
+            // musicIdTextBox
+            // 
+            this.musicIdTextBox.Location = new System.Drawing.Point(283, 9);
+            this.musicIdTextBox.Name = "musicIdTextBox";
+            this.musicIdTextBox.Size = new System.Drawing.Size(333, 20);
+            this.musicIdTextBox.TabIndex = 25;
+            // 
+            // deleteMusicButton
+            // 
+            this.deleteMusicButton.Location = new System.Drawing.Point(460, 38);
+            this.deleteMusicButton.Name = "deleteMusicButton";
+            this.deleteMusicButton.Size = new System.Drawing.Size(156, 23);
+            this.deleteMusicButton.TabIndex = 24;
+            this.deleteMusicButton.Text = "Delete Music";
+            this.deleteMusicButton.UseVisualStyleBackColor = true;
+            this.deleteMusicButton.Click += new System.EventHandler(this.deleteMusicButton_Click);
+            // 
+            // upsertRandomMusicButton
+            // 
+            this.upsertRandomMusicButton.Location = new System.Drawing.Point(6, 35);
+            this.upsertRandomMusicButton.Name = "upsertRandomMusicButton";
+            this.upsertRandomMusicButton.Size = new System.Drawing.Size(169, 23);
+            this.upsertRandomMusicButton.TabIndex = 20;
+            this.upsertRandomMusicButton.Text = "Upsert Random Music";
+            this.upsertRandomMusicButton.UseVisualStyleBackColor = true;
+            this.upsertRandomMusicButton.Click += new System.EventHandler(this.upsertRandomMusicButton_Click);
+            // 
+            // createMusicManagerButton
+            // 
+            this.createMusicManagerButton.Location = new System.Drawing.Point(6, 6);
+            this.createMusicManagerButton.Name = "createMusicManagerButton";
+            this.createMusicManagerButton.Size = new System.Drawing.Size(169, 23);
+            this.createMusicManagerButton.TabIndex = 19;
+            this.createMusicManagerButton.Text = "Create Manager";
+            this.createMusicManagerButton.UseVisualStyleBackColor = true;
+            this.createMusicManagerButton.Click += new System.EventHandler(this.createMusicManagerButton_Click);
             // 
             // DocumentDBTestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(623, 390);
-            this.Controls.Add(this.RandomGuidButton);
-            this.Controls.Add(this.deleteTestFileButton);
-            this.Controls.Add(this.localPathLabel);
-            this.Controls.Add(this.localPathTextBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.blobNameTextBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.fileIdTextBox);
-            this.Controls.Add(this.uploadTestFileButton);
-            this.Controls.Add(this.createBlobClientButton);
+            this.ClientSize = new System.Drawing.Size(666, 452);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.getButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.idTextBox);
-            this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.resultTextBox);
-            this.Controls.Add(this.upsertButton);
-            this.Controls.Add(this.createDatabaseButton);
             this.Name = "DocumentDBTestForm";
-            this.Text = "DocumentDB Test";
+            this.Text = "Storage Test";
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button createDatabaseButton;
-        private System.Windows.Forms.Button upsertButton;
         private System.Windows.Forms.RichTextBox resultTextBox;
-        private System.Windows.Forms.Button deleteButton;
-        private System.Windows.Forms.TextBox idTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button getButton;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button createBlobClientButton;
-        private System.Windows.Forms.Button uploadTestFileButton;
-        private System.Windows.Forms.TextBox fileIdTextBox;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox blobNameTextBox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox localPathTextBox;
-        private System.Windows.Forms.Label localPathLabel;
-        private System.Windows.Forms.Button deleteTestFileButton;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button RandomGuidButton;
+        private System.Windows.Forms.Button deleteTestFileButton;
+        private System.Windows.Forms.Label localPathLabel;
+        private System.Windows.Forms.TextBox localPathTextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox blobNameTextBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox fileIdTextBox;
+        private System.Windows.Forms.Button uploadTestFileButton;
+        private System.Windows.Forms.Button createBlobClientButton;
+        private System.Windows.Forms.Button getButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox idTextBox;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button upsertButton;
+        private System.Windows.Forms.Button createDatabaseButton;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox userNameTextBox;
+        private System.Windows.Forms.Button getAllMusicButton;
+        private System.Windows.Forms.Button getMusicButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox musicIdTextBox;
+        private System.Windows.Forms.Button deleteMusicButton;
+        private System.Windows.Forms.Button upsertRandomMusicButton;
+        private System.Windows.Forms.Button createMusicManagerButton;
     }
 }
 

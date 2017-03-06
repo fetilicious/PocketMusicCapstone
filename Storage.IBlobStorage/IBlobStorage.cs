@@ -14,8 +14,9 @@ namespace PocketMusic.Storage.BlobStorage
         /// <param name="fileId">fileID assosciated with the blob</param>
         /// <param name="blobName">name of the blob</param>
         /// <param name="localPath">local path blob is stored</param>
+        /// <param name="deleteLocal">local file is deleted if true</param>
         /// <returns></returns>
-        Task<Uri> UploadBlob(Guid fileId, string blobName, string localPath);
+        Task<Uri> UploadBlob(Guid fileId, string blobName, string localPath, bool deleteLocal);
 
         /// <summary>
         /// Deletes a blob

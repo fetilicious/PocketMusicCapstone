@@ -45,6 +45,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IMusicManager\IMusicManager.csproj">
+      <Project>{8420E2BA-B100-42BC-A6A6-D0A9BDEA3701}</Project>
+      <Name>IMusicManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IStorage\IDataStorage.csproj">
       <Project>{D45A6673-720F-4A1D-A8E9-7EF6FBB5C942}</Project>
       <Name>IDataStorage</Name>

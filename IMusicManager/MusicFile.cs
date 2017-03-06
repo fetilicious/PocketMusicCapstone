@@ -4,18 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PocketMusic.Storage.DataStorage.Models
+namespace PocketMusic.Music.MusicManager
 {
     public class MusicFile
     {
-        public int Id { get; set; }
+        public Guid? id { get; set; }
 
         public String Name { get; set; }
 
-        public Dictionary<String,String> BlobUrls { get; set; }
+        public Dictionary<String, LayerInfo> Layers { get; set; }
 
         public String Artist { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public String UserName { get; set; }
+
+        public DateTime? CreationDate { get; set; }
+
     }
 }

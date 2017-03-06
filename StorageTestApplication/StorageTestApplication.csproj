@@ -93,9 +93,25 @@
       <Project>{6590A698-8543-493D-AC8C-97DFC2654FFA}</Project>
       <Name>DocumentDBStorage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IMusicManager\IMusicManager.csproj">
+      <Project>{8420e2ba-b100-42bc-a6a6-d0a9bdea3701}</Project>
+      <Name>IMusicManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IPlaylistManager\IPlaylistManager.csproj">
+      <Project>{11d28ba1-32fa-4f51-8cb9-1ef55b91fe9c}</Project>
+      <Name>IPlaylistManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IStorage\IDataStorage.csproj">
       <Project>{D45A6673-720F-4A1D-A8E9-7EF6FBB5C942}</Project>
       <Name>IDataStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MusicManager\MusicManager.csproj">
+      <Project>{8BDC8260-F2F3-4EF9-B57F-845A49AD490D}</Project>
+      <Name>MusicManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PlaylistManager\PlaylistManager.csproj">
+      <Project>{a3b574ca-5cc1-448d-9932-63a6b6e82076}</Project>
+      <Name>PlaylistManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

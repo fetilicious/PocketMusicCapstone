@@ -8,5 +8,6 @@ namespace PocketMusic.Endpoint.HTTPEndpoint.Controllers
 {
     public class PlaylistController
     {
+
     }
 }

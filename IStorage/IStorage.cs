@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace PocketMusic.Storage.DataStorage
 {
-    public interface IStorage
+    public interface IStorage<T>
     {
-        Task<bool> UpsertFileItem(FileItem fileItem);
+        Task<bool> UpsertFileItem(T fileItem);
 
         Task<bool> DeleteFileItem(Guid id);
 
-        Task<FileItem> GetFileItem(Guid id);
+        Task<T> GetFileItem(Guid id);
 
-        Task<IEnumerable<FileItem>> QueryFileItems(string query);
+        Task<IEnumerable<T>> QueryFileItems(string query);
     }
 }

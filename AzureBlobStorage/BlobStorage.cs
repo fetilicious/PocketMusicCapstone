@@ -3,6 +3,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using PocketMusic.Storage.BlobStorage;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace AzureBlobStorage
             _blobContainer.SetPermissions( new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
         }
 
-        public async Task<Uri> UploadBlob(Guid fileId, string blobName, string localPath)
+        public async Task<Uri> UploadBlob(Guid fileId, string blobName, string localPath, bool deleteLocal)
         {
             if (String.IsNullOrWhiteSpace(blobName))
             {
@@ -53,6 +54,11 @@ namespace AzureBlobStorage
                 using (var fileStream = System.IO.File.OpenRead(localPath))
                 {
                     await blockBlob.UploadFromStreamAsync(fileStream);
+                }
+
+                if (deleteLocal)
+                {
+                    File.Delete(localPath);
                 }
 
                 return blockBlob.Uri;

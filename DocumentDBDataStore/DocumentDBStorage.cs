@@ -10,7 +10,7 @@ using Microsoft.Azure.Documents;
 
 namespace PocketMusic.Storage.DocumentDBStorage
 {
-    public class DocumentDBStorage : IStorage
+    public class DocumentDBStorage<T> : IStorage<T>
     {
         /// Hard coded connection string
         private const string _connectionString = "https://pocketmusic.documents.azure.com:443/";
@@ -51,34 +51,34 @@ namespace PocketMusic.Storage.DocumentDBStorage
             try
             {
                 await _client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(_dataBaseName, _collectionName, id.ToString()));
+
+                return true;
             }
             catch
             {
                 return false;
             }
-
-            return true;
         }
 
-        public async Task<FileItem> GetFileItem(Guid id)
+        public async Task<T> GetFileItem(Guid id)
         {
             try
             {
                 var response = await _client.ReadDocumentAsync(UriFactory.CreateDocumentUri(_dataBaseName, _collectionName, id.ToString()));
 
-                FileItem fileItem = (FileItem)(dynamic)response.Resource;
+                var fileItem = (T)(dynamic)response.Resource;
 
                 return fileItem;
             }
             catch
             {
-                return null;
+                return default(T);
             }
         }
 
-        public async Task<IEnumerable<FileItem>> QueryFileItems(string query)
+        public async Task<IEnumerable<T>> QueryFileItems(string query)
         {
-            List<FileItem> result = new List<FileItem>();
+            List<T> result = new List<T>();
 
             try
             {
@@ -86,7 +86,7 @@ namespace PocketMusic.Storage.DocumentDBStorage
                 FeedOptions queryOptions = new FeedOptions { MaxItemCount = -1 };
 
                 // Execute Query
-                IQueryable<FileItem> fileQuery = _client.CreateDocumentQuery<FileItem>(
+                IQueryable<T> fileQuery = _client.CreateDocumentQuery<T>(
                         UriFactory.CreateDocumentCollectionUri(_dataBaseName, _collectionName),
                         query,
                         queryOptions);
@@ -104,7 +104,7 @@ namespace PocketMusic.Storage.DocumentDBStorage
             }
         }
 
-        public async Task<bool> UpsertFileItem(FileItem fileItem)
+        public async Task<bool> UpsertFileItem(T fileItem)
         {
             try
             {
@@ -112,7 +112,6 @@ namespace PocketMusic.Storage.DocumentDBStorage
             }
             catch (Exception ex)
             {
-
                 return false;
             }
 

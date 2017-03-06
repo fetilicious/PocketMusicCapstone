@@ -1,4 +1,5 @@
-﻿using PocketMusic.Storage.DataStorage.Models;
+﻿using PocketMusic.Music.MusicManager;
+using PocketMusic.Storage.DataStorage.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,21 @@ namespace PocketMusic.Playlist.PlaylistManager
 {
     public class Playlist
     {
-        public Guid Id;
+        public Guid id { get; }
 
-        public String Name;
+        public String Name { get; }
 
-        public Dictionary<Guid, User> ConnectedUsers;
+        public Dictionary<String, User> ConnectedUsers { get; }
+
+        public List<Tuple<User, LayerInfo>> AvailableLayers { get; }
+
+        public Playlist(Guid ident, String name)
+        {
+            id = ident;
+            Name = name;
+            ConnectedUsers = new Dictionary<string, User>();
+            AvailableLayers = new List<Tuple<User, LayerInfo>>();
+        }
+
     }
 }
