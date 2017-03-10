@@ -32,6 +32,7 @@ namespace PocketMusic.Endpoint.HTTPEndpoint
             config.DependencyResolver = new UnityResolver(container);
 
             appBuilder.UseWebApi(config);
+            appBuilder.MapSignalR();
         }
     }
 }

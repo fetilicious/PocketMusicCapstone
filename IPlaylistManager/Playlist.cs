@@ -10,13 +10,13 @@ namespace PocketMusic.Playlist.PlaylistManager
 {
     public class PlaylistFile
     {
-        public Guid id { get; }
+        public Guid id { get; set; }
 
-        public String Name { get; }
+        public String Name { get; set; }
 
-        public Dictionary<String, User> ConnectedUsers { get; }
+        public Dictionary<String, User> ConnectedUsers { get; set; }
 
-        public List<Tuple<User, LayerInfo>> AvailableLayers { get; }
+        public List<Tuple<User, LayerInfo>> AvailableLayers { get; set; }
 
         public PlaylistFile(Guid ident, String name)
         {

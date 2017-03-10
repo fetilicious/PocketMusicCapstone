@@ -13,7 +13,7 @@ namespace PocketMusic.Music.MusicManager
 
         Task<MusicFile> GetMusicFile(Guid id);
 
-        Task<bool> DeleteMusicFile(Guid id);
+        Task<bool> DeleteMusicFile(Guid id, bool deleteBlobs);
 
         Task<IEnumerable<MusicFile>> GetAllMusicFiles(String user);
     }

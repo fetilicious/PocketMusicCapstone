@@ -213,7 +213,7 @@ namespace StorageTestApplication
         {
             try
             {
-                var result = await _musicManager.DeleteMusicFile(Guid.Parse(musicIdTextBox.Text));
+                var result = await _musicManager.DeleteMusicFile(Guid.Parse(musicIdTextBox.Text), true);
 
                 resultTextBox.Text = "Deleted" + JsonConvert.SerializeObject(result);
             }

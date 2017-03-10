@@ -17,6 +17,7 @@ namespace PocketMusic.Playlist.PlaylistManager
         public PlaylistManager()
         {
             _storage = new DocumentDBStorage<PlaylistFile>(Storage.DataStorage.PMDataType.Playlist);
+            _storage.CreateDatabaseAndDocument();
         }
 
         public async Task<PlaylistFile> CreatePlaylist(String name, MusicFile music, User user)
@@ -39,8 +40,6 @@ namespace PocketMusic.Playlist.PlaylistManager
             #endregion 
 
             PlaylistFile playlist = new PlaylistFile(Guid.NewGuid(), name);
-
-            playlist.ConnectedUsers.Add(user.UserName, user);
             
             foreach (var layer in music.Layers)
             {
@@ -75,13 +74,23 @@ namespace PocketMusic.Playlist.PlaylistManager
             var playlist = await _storage.GetFileItem(playlistId);
 
             playlist.ConnectedUsers.Remove(user.UserName);
+
+            Tuple<User, LayerInfo> toRemove = null;
             foreach (var layer in playlist.AvailableLayers)
             {
                 if (layer.Item1 != null && String.Compare(layer.Item1.UserName,user.UserName) == 0)
                 {
-                    playlist.AvailableLayers.Remove(layer);
+                    toRemove = layer;
                 }
             }
+
+            if (toRemove == null)
+            {
+                return false;
+            }
+
+            playlist.AvailableLayers.Remove(toRemove);
+            playlist.AvailableLayers.Add(new Tuple<User, LayerInfo>(null, toRemove.Item2));
 
             if (!await _storage.UpsertFileItem(playlist))
             {
@@ -109,14 +118,22 @@ namespace PocketMusic.Playlist.PlaylistManager
             var playlist = await _storage.GetFileItem(playlistId);
 
             playlist.ConnectedUsers.Remove(user.UserName);
+            Tuple<User, LayerInfo> toRemove = null;
             foreach (var layer in playlist.AvailableLayers)
             {
                 if (layer.Item1 == null && String.Compare(layer.Item2.Name, layerName) == 0)
                 {
-                    playlist.AvailableLayers.Remove(layer);
-                    playlist.AvailableLayers.Add(new Tuple<User, LayerInfo>(user, layer.Item2));
+                    toRemove = layer;
                 }
             }
+
+            if (toRemove == null)
+            {
+                return null;
+            }
+
+            playlist.AvailableLayers.Remove(toRemove);
+            playlist.AvailableLayers.Add(new Tuple<User, LayerInfo>(user, toRemove.Item2));
 
             if (!await _storage.UpsertFileItem(playlist))
             {

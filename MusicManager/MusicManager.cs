@@ -24,8 +24,15 @@ namespace PocketMusic.Music.MusicManager
             _blobStorage = new BlobStorage(ContainerName);
         }
 
-        public async Task<bool> DeleteMusicFile(Guid id)
+        public async Task<bool> DeleteMusicFile(Guid id, bool deleteBlobs)
         {
+            if (deleteBlobs)
+            {
+                var file = await _documentDBStorage.GetFileItem(id);
+                // fire forget delete
+                DeleteMusicBlobs(file);
+            }
+            
             return await _documentDBStorage.DeleteFileItem(id);
         }
 
@@ -104,9 +111,29 @@ namespace PocketMusic.Music.MusicManager
             }
 
             // updates database file
-            var databaseFile = await GetMusicFile(id);
+            var databaseFile = await _documentDBStorage.GetFileItem(id);
             databaseFile.Layers = updatedLayers;
-            await UpsertMusicFile(databaseFile);
+
+            if (!await _documentDBStorage.UpsertFileItem(databaseFile))
+            {
+                // TODO: Log
+            }
+        }
+
+        private async Task DeleteMusicBlobs(MusicFile file)
+        {
+            Guid id = file.id ?? default(Guid);
+            // Delete blobs using blob storage
+            if (file.Layers.Any())
+            {
+                foreach (var layer in file.Layers)
+                {
+                    if (!await _blobStorage.DeleteBlob(id, layer.Key))
+                    {
+                        // TODO: log
+                    }
+                }
+            }
         }
     }
 }

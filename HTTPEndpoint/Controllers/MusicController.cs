@@ -44,7 +44,7 @@ namespace PocketMusic.Endpoint.HTTPEndpoint.Controllers
         [HttpDelete]
         public async Task<IHttpActionResult> DeleteMusicFile(Guid id)
         {
-            var result = await _musicManager.DeleteMusicFile(id);
+            var result = await _musicManager.DeleteMusicFile(id, true);
 
             if (!result)
             {
@@ -75,9 +75,11 @@ namespace PocketMusic.Endpoint.HTTPEndpoint.Controllers
 
                 foreach (var datum in multipartUploadResult.FileData)
                 {
-                    var layer = new LayerInfo(datum.Headers.ContentDisposition.FileName, "", false);
+                    string layerName = datum.Headers.ContentDisposition.FileName.Replace(" ", "").Replace("\"", "");
+
+                    var layer = new LayerInfo(layerName, "", false);
                     layer.Url = datum.LocalFileName;
-                    file.Layers.Add(datum.Headers.ContentDisposition.FileName, layer);
+                    file.Layers.Add(layerName, layer);
                 }
 
                 var result = await _musicManager.UpsertMusicFile(file);
