@@ -12,14 +12,14 @@ namespace PocketMusic.Playlist.PlaylistManager
     public class PlaylistManager : IPlaylistManager
     {
 
-        DocumentDBStorage<Playlist> _storage;
+        DocumentDBStorage<PlaylistFile> _storage;
 
         public PlaylistManager()
         {
-            _storage = new DocumentDBStorage<Playlist>(Storage.DataStorage.PMDataType.Playlist);
+            _storage = new DocumentDBStorage<PlaylistFile>(Storage.DataStorage.PMDataType.Playlist);
         }
 
-        public async Task<Playlist> CreatePlaylist(String name, MusicFile music, User user)
+        public async Task<PlaylistFile> CreatePlaylist(String name, MusicFile music, User user)
         {
             #region Validation
 
@@ -38,7 +38,7 @@ namespace PocketMusic.Playlist.PlaylistManager
 
             #endregion 
 
-            Playlist playlist = new Playlist(Guid.NewGuid(), name);
+            PlaylistFile playlist = new PlaylistFile(Guid.NewGuid(), name);
 
             playlist.ConnectedUsers.Add(user.UserName, user);
             
@@ -91,7 +91,7 @@ namespace PocketMusic.Playlist.PlaylistManager
             return true;
         }
 
-        public async Task<Playlist> ConnectToPlaylistLayer(Guid playlistId, string layerName, User user)
+        public async Task<PlaylistFile> ConnectToPlaylistLayer(Guid playlistId, string layerName, User user)
         {
             #region Validation
 
@@ -126,12 +126,12 @@ namespace PocketMusic.Playlist.PlaylistManager
             return playlist;
         }
 
-        public async Task<IEnumerable<Playlist>> GetAllPlaylists()
+        public async Task<IEnumerable<PlaylistFile>> GetAllPlaylists()
         {
             return await _storage.QueryFileItems("SELECT * FROM p");
         }
 
-        public async Task<Playlist> GetPlaylist(Guid playlistId)
+        public async Task<PlaylistFile> GetPlaylist(Guid playlistId)
         {
             return await _storage.GetFileItem(playlistId);
         }

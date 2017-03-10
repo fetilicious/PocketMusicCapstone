@@ -59,10 +59,6 @@ namespace PocketMusic.Music.MusicManager
             {
                 throw new ArgumentNullException(nameof(file.Name));
             }
-            if (String.IsNullOrEmpty(file.UserName))
-            {
-                throw new ArgumentNullException(nameof(file.UserName));
-            }
 
             #endregion
 
@@ -75,16 +71,8 @@ namespace PocketMusic.Music.MusicManager
                 file.CreationDate = DateTime.Now;
             }
 
-            // Upload blobs using blob storage
-            if (file.Layers.Any())
-            {
-                foreach (var layer in file.Layers)
-                {
-                    // fire and forget upload
-                    Guid id = file.id ?? default(Guid);
-                    _blobStorage.UploadBlob(id, layer.Value.Name, layer.Value.Url.ToString(), false);
-                }
-            }
+            // fire and forget
+            UploadMusicBlobs(file);
 
             // Insert database record
             if (!await _documentDBStorage.UpsertFileItem(file))
@@ -95,6 +83,30 @@ namespace PocketMusic.Music.MusicManager
             return file;
         }
 
+        private async Task UploadMusicBlobs(MusicFile file)
+        {
+            Guid id = file.id ?? default(Guid);
+            Dictionary<string, LayerInfo> updatedLayers = new Dictionary<string, LayerInfo>();
 
+            // Upload blobs using blob storage
+            if (file.Layers.Any())
+            {
+                
+                foreach (var layer in file.Layers)
+                {
+                    var uri = await _blobStorage.UploadBlob(id, layer.Key, layer.Value.Url, true);
+
+                    LayerInfo newLayer = new LayerInfo(layer.Value.Name, layer.Value.Description, true);
+                    newLayer.Url = uri.ToString();
+
+                    updatedLayers.Add(newLayer.Name, newLayer);
+                }
+            }
+
+            // updates database file
+            var databaseFile = await GetMusicFile(id);
+            databaseFile.Layers = updatedLayers;
+            await UpsertMusicFile(databaseFile);
+        }
     }
 }

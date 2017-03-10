@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PocketMusic.Playlist.PlaylistManager
 {
-    public class Playlist
+    public class PlaylistFile
     {
         public Guid id { get; }
 
@@ -18,7 +18,7 @@ namespace PocketMusic.Playlist.PlaylistManager
 
         public List<Tuple<User, LayerInfo>> AvailableLayers { get; }
 
-        public Playlist(Guid ident, String name)
+        public PlaylistFile(Guid ident, String name)
         {
             id = ident;
             Name = name;

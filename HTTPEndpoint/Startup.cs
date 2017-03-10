@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Owin;
 using System.Web.Http;
+using Microsoft.Practices.Unity;
+using PocketMusic.Music.MusicManager;
+using PocketMusic.Playlist.PlaylistManager;
 
 namespace PocketMusic.Endpoint.HTTPEndpoint
 {
@@ -21,6 +24,12 @@ namespace PocketMusic.Endpoint.HTTPEndpoint
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Dependency Injection
+            var container = new UnityContainer();
+            container.RegisterType<IMusicManager, MusicManager>(new HierarchicalLifetimeManager());
+            container.RegisterType<IPlaylistManager, PlaylistManager>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);
 
             appBuilder.UseWebApi(config);
         }

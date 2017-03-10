@@ -12,76 +12,76 @@ namespace PocketMusic.Storage.StaticStorage
     {
         static TemporaryStorage()
         {
-            _temporaryStorage.TryAdd(1, new MusicFile { id = new Guid(), Name = "Don't Stop Believing", });
-            _temporaryStorage.TryAdd(2, new MusicFile { id = new Guid(), Name = "Paralyzer", });
-            _temporaryStorage.TryAdd(3, new MusicFile { id = new Guid(), Name = "Viva La Vida", });
+            _temporaryStorage.TryAdd(Guid.NewGuid(), new MusicFile { id = Guid.NewGuid(), Name = "Don't Stop Believing", });
+            _temporaryStorage.TryAdd(Guid.NewGuid(), new MusicFile { id = Guid.NewGuid(), Name = "Paralyzer", });
+            _temporaryStorage.TryAdd(Guid.NewGuid(), new MusicFile { id = Guid.NewGuid(), Name = "Viva La Vida", });
         }
 
         private static ConcurrentDictionary<Guid, MusicFile> _temporaryStorage = new ConcurrentDictionary<Guid, MusicFile>();
 
-        public async static Task<bool> UpsertMusicFile(MusicFile file)
-        {
-            #region Validation
+        //public async static Task<bool> UpsertMusicFile(MusicFile file)
+        //{
+        //    #region Validation
 
-            if (file == null)
-            {
-                return false;
-            }
-            if (_temporaryStorage.ContainsKey(file.id))
-            {
-                MusicFile outFile;
-                // Temporary for UPSERT
-                _temporaryStorage.TryRemove(file.id, out outFile);
-            }
+        //    if (file == null)
+        //    {
+        //        return false;
+        //    }
+        //    if (_temporaryStorage.ContainsKey(file.id))
+        //    {
+        //        MusicFile outFile;
+        //        // Temporary for UPSERT
+        //        _temporaryStorage.TryRemove(file.id, out outFile);
+        //    }
 
-            #endregion
+        //    #endregion
 
-            _temporaryStorage.TryAdd(file.id, file);
+        //    _temporaryStorage.TryAdd(file.id, file);
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        public async static Task<bool> DeleteMusicFile(int id)
-        {
-            #region Validation
+        //public async static Task<bool> DeleteMusicFile(int id)
+        //{
+        //    #region Validation
 
-            if (!_temporaryStorage.ContainsKey(id))
-            {
-                return false;
-            }
+        //    if (!_temporaryStorage.ContainsKey(id))
+        //    {
+        //        return false;
+        //    }
 
-            #endregion
+        //    #endregion
 
-            MusicFile outFile;
+        //    MusicFile outFile;
 
-            _temporaryStorage.TryRemove(id, out outFile);
+        //    _temporaryStorage.TryRemove(id, out outFile);
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        public async static Task<IEnumerable<MusicFile>> GetAllMusicFiles()
-        {
-            List<MusicFile> files = new List<MusicFile>();
+        //public async static Task<IEnumerable<MusicFile>> GetAllMusicFiles()
+        //{
+        //    List<MusicFile> files = new List<MusicFile>();
 
-            foreach (var kvp in _temporaryStorage)
-            {
-                files.Add(kvp.Value);
-            }
+        //    foreach (var kvp in _temporaryStorage)
+        //    {
+        //        files.Add(kvp.Value);
+        //    }
 
-            return files;
-        }
+        //    return files;
+        //}
 
-        public async static Task<MusicFile> GetMusicFile(int id)
-        {
-            MusicFile file = null;
+        //public async static Task<MusicFile> GetMusicFile(int id)
+        //{
+        //    MusicFile file = null;
 
-            if (!_temporaryStorage.TryGetValue(id, out file))
-            {
-                return null;
-            }
+        //    if (!_temporaryStorage.TryGetValue(id, out file))
+        //    {
+        //        return null;
+        //    }
 
-            return file;
-        }
+        //    return file;
+        //}
 
     }
 }

@@ -8,6 +8,7 @@ namespace PocketMusic.Music.MusicManager
 {
     public class MusicFile
     {
+
         public Guid? id { get; set; }
 
         public String Name { get; set; }
@@ -20,5 +21,16 @@ namespace PocketMusic.Music.MusicManager
 
         public DateTime? CreationDate { get; set; }
 
+
+        public MusicFile(string name)
+        {
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            Name = name;
+            Layers = new Dictionary<string, LayerInfo>();
+        }
     }
 }

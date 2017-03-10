@@ -10,7 +10,7 @@ namespace PocketMusic.Music.MusicManager
     {
         public string Name;
 
-        public Uri Url;
+        public string Url;
 
         public string Description;
 

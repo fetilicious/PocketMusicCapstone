@@ -46,7 +46,7 @@ namespace AzureBlobStorage
             
             try
             {
-                String blobPath = String.Format("{0}/{1}", fileId.ToString("N"), blobName);
+                String blobPath = String.Format("{0}/{1}", fileId.ToString("N"), blobName).Replace(" ", "").Replace("\"","");
                 // Retrieve reference to a blob named "myblob".
                 CloudBlockBlob blockBlob = _blobContainer.GetBlockBlobReference(blobPath);
 
@@ -91,6 +91,5 @@ namespace AzureBlobStorage
                 return false;
             }
         }
-
     }
 }

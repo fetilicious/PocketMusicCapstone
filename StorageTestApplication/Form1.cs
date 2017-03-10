@@ -181,9 +181,8 @@ namespace StorageTestApplication
         {
             try
             {
-                MusicFile mf = new MusicFile();
+                MusicFile mf = new MusicFile(Guid.NewGuid().ToString("N"));
 
-                mf.Name = Guid.NewGuid().ToString("N");
                 mf.UserName = "testUser";
 
                 var result = await _musicManager.UpsertMusicFile(mf);
